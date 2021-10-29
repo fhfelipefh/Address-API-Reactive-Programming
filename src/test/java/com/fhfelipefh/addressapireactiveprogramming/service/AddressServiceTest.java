@@ -68,4 +68,23 @@ public class AddressServiceTest {
                 .verifyComplete();
     }
 
+    @Test
+    @DisplayName("delete Address returns a Mono of address")
+    public void delete_ReturnMonoOfAddress_WhenSuccessful() {
+        BDDMockito.when(addressRepository.deleteById(address.getId())).thenReturn(Mono.empty());
+        StepVerifier.create(addressService.deleteAddressById(address.getId()))
+                .expectSubscription()
+                .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("update Address returns a Mono of address")
+    public void update_ReturnMonoOfAddress_WhenSuccessful() {
+        StepVerifier.create(addressService.updateAddress(address.getId(),address))
+                .expectSubscription()
+                .expectNext(address)
+                .verifyComplete();
+    }
+
+
 }

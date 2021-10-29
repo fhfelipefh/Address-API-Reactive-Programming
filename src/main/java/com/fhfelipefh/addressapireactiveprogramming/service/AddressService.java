@@ -56,8 +56,9 @@ public class AddressService {
 
     public Mono deleteAddressById(Long id) {
         log.info("Deleting address with id {}", id);
-        return findAddressById(id)
+        findAddressById(id)
                 .flatMap(addressRepository::delete);
+        return Mono.empty();
     }
 
     private void throwResponseStatusExceptionWhenEmptyName(Address address) {
