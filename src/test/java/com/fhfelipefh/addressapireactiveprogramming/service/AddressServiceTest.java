@@ -17,6 +17,8 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(SpringExtension.class)
 public class AddressServiceTest {
@@ -48,6 +50,7 @@ public class AddressServiceTest {
                 .expectSubscription()
                 .expectNext(address)
                 .verifyComplete();
+        verify(addressRepository, times(1)).findAll();
     }
 
     @Test
