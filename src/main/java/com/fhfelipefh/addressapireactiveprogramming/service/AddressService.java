@@ -67,4 +67,7 @@ public class AddressService {
         }
     }
 
+    public Flux<Address> findByCep(String cep) {
+        return addressRepository.findAddressByCep(cep);
+    }
 }

@@ -22,6 +22,11 @@ public class AddressController {
         return addressService.findAllAddresses();
     }
 
+    @GetMapping(path = "/cep/{cep}")
+    public Flux<Address> findByCep(@PathVariable String cep) {
+        return addressService.findByCep(cep);
+    }
+
     @GetMapping(path = "{id}")
     public Mono<Address> findById(@PathVariable Long id) {
         return addressService.findAddressById(id);
