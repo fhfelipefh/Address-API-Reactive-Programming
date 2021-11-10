@@ -47,4 +47,15 @@ public class Address {
     @NotBlank
     @Column("type")
     private String type;
+
+    public Address(Address address) {
+        this.id = address.getId();
+        this.number = address.getNumber();
+        this.street = address.getStreet();
+        this.cep = address.getCep();
+        this.city = address.getCity();
+        this.state = address.getState();
+        this.country = address.getCountry();
+        this.type = address.getType();
+    }
 }

@@ -19,17 +19,17 @@ public class AddressController {
 
     @GetMapping
     public Flux<Address> findAllAddresses() {
-        return addressService.findAllAddresses();
+        return addressService.findAllAddresses().switchIfEmpty(Mono.error(new IllegalArgumentException("Addresses not found")));
     }
 
     @GetMapping(path = "/cep/{cep}")
     public Flux<Address> findByCep(@PathVariable String cep) {
-        return addressService.findByCep(cep);
+        return addressService.findByCep(cep).switchIfEmpty(Mono.error(new IllegalArgumentException("Addresses not found")));
     }
 
     @GetMapping(path = "{id}")
     public Mono<Address> findById(@PathVariable Long id) {
-        return addressService.findAddressById(id);
+        return addressService.findAddressById(id).switchIfEmpty(Mono.error(new IllegalArgumentException("Address not found")));
     }
 
     @PostMapping
